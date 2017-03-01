@@ -9,6 +9,7 @@ import org.jgrapht.graph.SimpleGraph;
 public class Network {
 
     private final UndirectedGraph<String, DefaultEdge> simpleGraph = new SimpleGraph<>(DefaultEdge.class);
+    private final ConnectivityInspector<String, DefaultEdge> inspector = new ConnectivityInspector<>(simpleGraph);
     private final int size;
 
     public Network(int size) {
@@ -31,7 +32,6 @@ public class Network {
 
     public boolean query(int source, int target) {
         checkVertexBoundaries(source, target);
-        ConnectivityInspector<String, DefaultEdge> inspector = new ConnectivityInspector<>(simpleGraph);
         return inspector.pathExists("v" + source, "v" + target);
     }
 
